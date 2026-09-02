@@ -1,4 +1,5 @@
 
+
 # Inference Gateway
 
 Inference Gateway is a lightweight, cloud‑native proxy that unifies multiple LLM providers behind a single OpenAI‑compatible API. It simplifies access to various language models, supports streaming, tool calling, and MCP, and is designed for production use with observability, authentication, and Kubernetes support.
