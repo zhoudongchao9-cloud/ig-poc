@@ -162,7 +162,7 @@ jobs:
           goreleaser release --clean --skip=validate
 
       - name: Upload release artifacts
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@v7
         with:
           name: release-dist
           path: |
