@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 1
       - name: Run Claude Code
         id: claude
-        uses: anthropics/claude-code-action@v1.0.201
+        uses: anthropics/claude-code-action@v1.0.210
         with:
           anthropic_api_key: ${{ secrets.CCPRO_KEY }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
@@ -48,7 +48,7 @@ jobs:
             --model claude-sonnet-4-6
       - name: Upload execution log
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: claude-execution-log
           path: ${{ runner.temp }}/claude-execution-output.json
