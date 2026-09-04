@@ -636,6 +636,9 @@ Download the latest release from the
 
 For more details, see the [CLI documentation](https://github.com/inference-gateway/cli).
 
+```text
+example block
+
 ## License
 
 This project is licensed under the Apache 2.0 License.
