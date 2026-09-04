@@ -293,6 +293,9 @@ Download pre-built binaries directly from the [releases page](https://github.com
    chmod +x /usr/local/bin/inference-gateway
    ```
 
+```text
+notice...
+
 ### Verify Installation
 
 ```bash
