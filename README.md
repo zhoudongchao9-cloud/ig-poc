@@ -633,8 +633,11 @@ Download the latest release from the
    ```bash
    infer chat
    ```
-```text
-example block
+
+   ```text
+   example block
+   ```
+
 For more details, see the [CLI documentation](https://github.com/inference-gateway/cli).
 
 ## License
