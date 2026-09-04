@@ -242,6 +242,9 @@ The easiest way to install the Inference Gateway is using the automated install 
 curl -fsSL https://raw.githubusercontent.com/inference-gateway/inference-gateway/main/install.sh | bash
 ```
 
+```text
+highlight
+
 **Install specific version:**
 
 ```bash
