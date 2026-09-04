@@ -7,7 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.12.0
 	github.com/metoro-io/mcp-golang v0.16.1
 	github.com/oapi-codegen/runtime v1.7.0
-	github.com/open-policy-agent/opa v1.19.1
+	github.com/open-policy-agent/opa v1.20.0
 	github.com/pelletier/go-toml/v2 v2.4.3
 	github.com/prometheus/client_golang v1.24.1
 	github.com/sethvargo/go-envconfig v1.4.3
