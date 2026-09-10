@@ -412,7 +412,7 @@ curl http://localhost:9464/metrics
 ### Available Metrics
 
 Metrics follow the [OpenTelemetry GenAI semantic conventions](https://opentelemetry.io/docs/specs/semconv/gen-ai/).
-Every series carries a `source` label: `gateway` for gateway-observed traffic, or a client-supplied value
+Every series carries a `source` label: `gateway` for gateway-obsereved traffic, or a client-supplied value
 (e.g. `claude-code-subscription`) for pushed metrics.
 
 | Metric                                                | Type      | Description                                                             |
