@@ -642,7 +642,7 @@ This project is licensed under the Apache 2.0 License.
 
 ## Contributing
 
-Found a bug, missing provider, or have a feature in mind?  
+Found a bug, missing provider, or have a feature in mind?
 You're more than welcome to submit pull requests or open issues for any fixes, improvements, or new ideas!
 
 Please read the [CONTRIBUTING.md](./CONTRIBUTING.md) for more details.
