@@ -19,6 +19,7 @@ import (
 	middlewares "github.com/inference-gateway/inference-gateway/api/middlewares"
 	config "github.com/inference-gateway/inference-gateway/config"
 	guardrails "github.com/inference-gateway/inference-gateway/internal/guardrails"
+	notify "github.com/inference-gateway/inference-gateway/internal/notify"
 	mcp "github.com/inference-gateway/inference-gateway/internal/mcp"
 	tts "github.com/inference-gateway/inference-gateway/internal/tts"
 	l "github.com/inference-gateway/inference-gateway/logger"
@@ -311,6 +312,14 @@ func main() {
 		r.Use(telemetry.Middleware())
 	}
 	r.Use(oidcAuthenticator.Middleware())
+	
+	// Callback middleware: opt-in per request via X-Callback-URL; the
+	// target is approved by policy before the proxy call and the usage
+	// event is delivered afterwards.
+	callbackPolicy := notify.NewPolicy()
+	callbackDispatcher := notify.NewDispatcher(os.Getenv("IG_CALLBACK_SECRET"))
+	r.Use(middlewares.Callback(callbackDispatcher, callbackPolicy))
+	logger.Info("callback middleware added to request pipeline")
 
 	// Add guardrails middleware (before MCP so it wraps MCP's writer for post_call).
 	r.Use(guardrailsMiddleware.Middleware())
