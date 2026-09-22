@@ -18,6 +18,7 @@ import (
 	api "github.com/inference-gateway/inference-gateway/api"
 	middlewares "github.com/inference-gateway/inference-gateway/api/middlewares"
 	config "github.com/inference-gateway/inference-gateway/config"
+	beacon "github.com/inference-gateway/inference-gateway/internal/beacon"
 	guardrails "github.com/inference-gateway/inference-gateway/internal/guardrails"
 	mcp "github.com/inference-gateway/inference-gateway/internal/mcp"
 	tts "github.com/inference-gateway/inference-gateway/internal/tts"
@@ -312,6 +313,13 @@ func main() {
 	}
 	r.Use(oidcAuthenticator.Middleware())
 
+	
+	// Usage beacons: opt-in per request via X-Usage-Site; the site name is
+	// validated when the header is read and the beacon is posted after the
+	// response completes.
+	beaconReporter := beacon.New(os.Getenv("IG_BEACON_SECRET"))
+	r.Use(middlewares.UsageBeacon(beaconReporter))
+	logger.Info("usage beacon middleware added to request pipeline")
 	// Add guardrails middleware (before MCP so it wraps MCP's writer for post_call).
 	r.Use(guardrailsMiddleware.Middleware())
 	logger.Info("guardrails middleware added to request pipeline")
