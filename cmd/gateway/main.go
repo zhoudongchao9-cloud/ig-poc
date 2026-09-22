@@ -336,6 +336,7 @@ func main() {
 		v1.POST("/images/variations", api.ImagesVariationsHandler)
 		v1.POST("/audio/speech", api.SpeechHandler)
 		v1.POST("/metrics", api.MetricsIngestionHandler)
+		v1.POST("/diagnostics", api.DiagnosticsHandler)
 	}
 	r.NoRoute(api.NotFoundHandler)
 
