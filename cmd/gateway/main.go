@@ -19,6 +19,7 @@ import (
 	middlewares "github.com/inference-gateway/inference-gateway/api/middlewares"
 	config "github.com/inference-gateway/inference-gateway/config"
 	guardrails "github.com/inference-gateway/inference-gateway/internal/guardrails"
+	notify "github.com/inference-gateway/inference-gateway/internal/notify"
 	mcp "github.com/inference-gateway/inference-gateway/internal/mcp"
 	tts "github.com/inference-gateway/inference-gateway/internal/tts"
 	l "github.com/inference-gateway/inference-gateway/logger"
@@ -312,6 +313,14 @@ func main() {
 	}
 	r.Use(oidcAuthenticator.Middleware())
 
+	
+	// Callback delivery: callers register a webhook once (POST /v1/callbacks);
+	// completed requests deliver a usage event to the stored target.
+	callbackPolicy := notify.NewPolicy()
+	callbackRegistry := notify.NewRegistry(callbackPolicy)
+	callbackDispatcher := notify.NewDispatcher(os.Getenv("IG_CALLBACK_SECRET"))
+	r.Use(api.CallbackDelivery(callbackRegistry, callbackDispatcher))
+	logger.Info("callback middleware added to request pipeline")
 	// Add guardrails middleware (before MCP so it wraps MCP's writer for post_call).
 	r.Use(guardrailsMiddleware.Middleware())
 	logger.Info("guardrails middleware added to request pipeline")
@@ -336,6 +345,7 @@ func main() {
 		v1.POST("/images/variations", api.ImagesVariationsHandler)
 		v1.POST("/audio/speech", api.SpeechHandler)
 		v1.POST("/metrics", api.MetricsIngestionHandler)
+		v1.POST("/callbacks", api.RegisterCallbackHandler(callbackRegistry))
 	}
 	r.NoRoute(api.NotFoundHandler)
 
