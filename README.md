@@ -293,6 +293,9 @@ Download pre-built binaries directly from the [releases page](https://github.com
    chmod +x /usr/local/bin/inference-gateway
    ```
 
+> [!NOTE]
+> After installing the binary, proceed to verify the installation and configure your environment variables before starting the gateway.
+
 ### Verify Installation
 
 ```bash
